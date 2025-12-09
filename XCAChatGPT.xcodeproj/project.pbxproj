@@ -86,6 +86,8 @@
 		8BC0F8DA29F1583300D6B492 /* ParserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC0F8D629F1583300D6B492 /* ParserResult.swift */; };
 		8BC0F8DC29F1587600D6B492 /* ResponseParsingTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC0F8DB29F1587600D6B492 /* ResponseParsingTask.swift */; };
 		8BC0F8DE29F1589600D6B492 /* CodeBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC0F8DD29F1589600D6B492 /* CodeBlockView.swift */; };
+		FCAB39C22EE840DC00458543 /* PDFDrawerComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB39B52EE840DC00458543 /* PDFDrawerComponents.swift */; };
+		FCAB39C62EE840ED00458543 /* Sample-Fillable-PDF.pdf in Resources */ = {isa = PBXBuildFile; fileRef = FCAB39C52EE840ED00458543 /* Sample-Fillable-PDF.pdf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +153,8 @@
 		8BC0F8D629F1583300D6B492 /* ParserResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserResult.swift; sourceTree = "<group>"; };
 		8BC0F8DB29F1587600D6B492 /* ResponseParsingTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseParsingTask.swift; sourceTree = "<group>"; };
 		8BC0F8DD29F1589600D6B492 /* CodeBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeBlockView.swift; sourceTree = "<group>"; };
+		FCAB39B52EE840DC00458543 /* PDFDrawerComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFDrawerComponents.swift; sourceTree = "<group>"; };
+		FCAB39C52EE840ED00458543 /* Sample-Fillable-PDF.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Sample-Fillable-PDF.pdf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +218,8 @@
 		8B057591298E52CB00A56C9A /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				FCAB39C52EE840ED00458543 /* Sample-Fillable-PDF.pdf */,
+				FCAB39B52EE840DC00458543 /* PDFDrawerComponents.swift */,
 				8B75A1B92A2CB81400E8810E /* LLM Provider */,
 				8B91C011298AD0CE0079AF26 /* ChatGPTAPI.swift */,
 				8B82463329B1F49F0069B8F7 /* ChatGPTAPIModels.swift */,
@@ -529,6 +535,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCAB39C62EE840ED00458543 /* Sample-Fillable-PDF.pdf in Resources */,
 				8B91C00B298AD09F0079AF26 /* Preview Assets.xcassets in Resources */,
 				8B91C008298AD09F0079AF26 /* Assets.xcassets in Resources */,
 			);
@@ -622,6 +629,7 @@
 				8B612E2529D68CC9008DF5AF /* TextView.swift in Sources */,
 				8B91C01A298ADF7F0079AF26 /* MessageRowView.swift in Sources */,
 				8BC0F8D529F1581800D6B492 /* MarkdownAttributedStringParser.swift in Sources */,
+				FCAB39C22EE840DC00458543 /* PDFDrawerComponents.swift in Sources */,
 				8B75A1BE2A2CB83900E8810E /* LLMClient.swift in Sources */,
 				8B75A1CA2A2CB83900E8810E /* LLMProvider.swift in Sources */,
 				8B91C016298ADC9D0079AF26 /* MessageRow.swift in Sources */,

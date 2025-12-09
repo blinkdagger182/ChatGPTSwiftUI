@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AVKit
+import PDFKit
 
 struct ContentView: View {
         
@@ -14,9 +15,54 @@ struct ContentView: View {
     @ObservedObject var vm: ViewModel
     @FocusState var isTextFieldFocused: Bool
     
+    // PDF Drawer State
+    @State private var showPDFDrawer: Bool = true  // Show by default for testing
+    @State private var currentPDFDocument: PDFDocument? = nil
+    @State private var drawerExpanded: Bool = false
+    
     var body: some View {
-        chatListView
-            .navigationTitle(vm.navigationTitle)
+        ZStack(alignment: .trailing) {
+            chatListView
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    // Tap background to minimize drawer when expanded
+                    #if os(iOS)
+                    if showPDFDrawer {
+                        minimizeDrawer()
+                    }
+                    #endif
+                }
+            
+            #if os(iOS)
+            if showPDFDrawer {
+                RightSideDrawerView(isExpanded: $drawerExpanded) {
+                    PDFDrawerContainer(pdfDocument: currentPDFDocument)
+                }
+            }
+            #endif
+        }
+        .navigationTitle(vm.navigationTitle)
+        #if os(iOS)
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                // Load Sample PDF Button
+                Button {
+                    loadSamplePDF()
+                } label: {
+                    Image(systemName: "doc.badge.plus")
+                }
+                
+                // Toggle Drawer Button
+                Button {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                        showPDFDrawer.toggle()
+                    }
+                } label: {
+                    Image(systemName: showPDFDrawer ? "doc.text.fill" : "doc.text")
+                }
+            }
+        }
+        #endif
     }
     
     var chatListView: some View {
@@ -113,6 +159,48 @@ struct ContentView: View {
     private func scrollToBottom(proxy: ScrollViewProxy) {
         guard let id = vm.messages.last?.id else { return }
         proxy.scrollTo(id, anchor: .bottomTrailing)
+    }
+    
+    // MARK: - PDF Helper Methods
+    
+    /// Load PDF from URL
+    func loadPDF(from url: URL) {
+        currentPDFDocument = PDFDocument(url: url)
+        if currentPDFDocument != nil {
+            showPDFDrawer = true
+        }
+    }
+    
+    /// Load PDF from Data
+    func loadPDF(from data: Data) {
+        currentPDFDocument = PDFDocument(data: data)
+        if currentPDFDocument != nil {
+            showPDFDrawer = true
+        }
+    }
+    
+    /// Load sample PDF for testing
+    func loadSamplePDF() {
+        // Load the Sample-Fillable-PDF.pdf from bundle
+        if let url = Bundle.main.url(forResource: "Sample-Fillable-PDF", withExtension: "pdf") {
+            loadPDF(from: url)
+        } else {
+            print("Sample-Fillable-PDF.pdf not found in bundle")
+        }
+    }
+    
+    /// Close PDF drawer
+    func closePDFDrawer() {
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+            showPDFDrawer = false
+        }
+    }
+    
+    /// Minimize drawer (contract to handle only)
+    func minimizeDrawer() {
+        if drawerExpanded {
+            drawerExpanded = false
+        }
     }
 }
 
